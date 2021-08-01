@@ -9,9 +9,11 @@
 
 ## 참여 방법
 1. 본 repo를 fork
-2. upstream으로 원본 repo 등록
+2. fork 한 repo에서 upstream으로 원본 repo 등록
     - `git remote add upstream https://github.com/whalesta/algorithm.git`
-    - 변경사항이 있을 때 마다 merga
+    - 원본 repo에 변경사항이 생길 때 마다 
+        - `git fetch upstream`
+        - `git merge upstream/master`
 3. 알고리즘 풀이 후 본인의 repo에 push
 4. Pull Request (PR) 생성
 5. 코드 리뷰 완료 후 merge
