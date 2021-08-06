@@ -1,4 +1,4 @@
-# 회전하는 큐
+# 2 - rotate
 import collections
 N, M = list(map(int,input().split()))
 N_list = [i+1 for i in range(N)]
@@ -13,11 +13,8 @@ while len(queue) != (N-M):
     p_list.pop(0)
   else:
     if queue.index(p_list[0])>len(queue)//2:
-      last = queue[-1]
-      queue.pop()
-      queue.appendleft(last)
+      queue.rotate(1)
     else:
-      queue.popleft()
-      queue.append(first)
+      queue.rotate(-1)
     cnt+=1
 print(cnt)
