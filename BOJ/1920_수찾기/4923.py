@@ -17,16 +17,14 @@
 # 빠른 탐색이 key : 어떻게?
 # ---
 
+# Solution 1: 시간 초과
 import sys
 
 def binary_search(target:int, find:list):
     half = len(find)//2
 
-    print(f"\t\t[recursion] 'find' list is [{find}]\t => \t {find[half]}")
-
     # return
     if target == find[half]:    # find!
-        print("*"*5 + " FIND! ", "*"*5, "=> ", find[half])
         return 1
     elif len(find) == 1:   # break condition
         return 0
@@ -34,11 +32,10 @@ def binary_search(target:int, find:list):
     # search
     if target <= find[half]:
         new_find = find[:half]
-        binary_search(target, new_find)  # new list
+        return binary_search(target, new_find)  # new list
     else:
         new_find = find[half:]
-        binary_search(target, new_find) # new list
-
+        return binary_search(target, new_find) # new list
 
 
 def main():
@@ -54,80 +51,12 @@ def main():
     # output
     result_list = list()
     for target in target_numbers:
-        print(f"target number is **{target}**, sorted_list is [{sorted_list}]")
-        print(binary_search(target, sorted_list))
         result_list.append(binary_search(target, sorted_list))
 
-        print(f"\tresult_list is [{result_list}]")
-        print("="*20)
-
-    # for number in result:    # constructed 0 or 1, len(result_list) = M
-    #     print(number)
+    for number in result_list:    # constructed 0 or 1, len(result_list) = M
+        print(number)
     return
 
 if __name__ == "__main__":
     main()
 
-# ===============================================
-# 아니 이해가 안되네
-
-# 5
-# 4 1 5 2 3
-# 5
-# 1 3 7 9 5
-# target number is **1**, sorted_list is [[1, 2, 3, 4, 5]]
-#                 [recursion] 'find' list is [[1, 2, 3, 4, 5]]     =>      3
-#                 [recursion] 'find' list is [[1, 2]]      =>      2
-#                 [recursion] 'find' list is [[1]]         =>      1
-# ***** FIND!  ***** =>  1
-# None
-#                 [recursion] 'find' list is [[1, 2, 3, 4, 5]]     =>      3
-#                 [recursion] 'find' list is [[1, 2]]      =>      2
-#                 [recursion] 'find' list is [[1]]         =>      1
-# ***** FIND!  ***** =>  1
-#         result_list is [[None]]
-# ====================
-# target number is **3**, sorted_list is [[1, 2, 3, 4, 5]]
-#                 [recursion] 'find' list is [[1, 2, 3, 4, 5]]     =>      3
-# ***** FIND!  ***** =>  3
-# 1
-#                 [recursion] 'find' list is [[1, 2, 3, 4, 5]]     =>      3
-# ***** FIND!  ***** =>  3
-#         result_list is [[None, 1]]
-# ====================
-# target number is **7**, sorted_list is [[1, 2, 3, 4, 5]]
-#                 [recursion] 'find' list is [[1, 2, 3, 4, 5]]     =>      3
-#                 [recursion] 'find' list is [[3, 4, 5]]   =>      4
-#                 [recursion] 'find' list is [[4, 5]]      =>      5
-#                 [recursion] 'find' list is [[5]]         =>      5
-# None
-#                 [recursion] 'find' list is [[1, 2, 3, 4, 5]]     =>      3
-#                 [recursion] 'find' list is [[3, 4, 5]]   =>      4
-#                 [recursion] 'find' list is [[4, 5]]      =>      5
-#                 [recursion] 'find' list is [[5]]         =>      5
-#         result_list is [[None, 1, None]]
-# ====================
-# target number is **9**, sorted_list is [[1, 2, 3, 4, 5]]
-#                 [recursion] 'find' list is [[1, 2, 3, 4, 5]]     =>      3
-#                 [recursion] 'find' list is [[3, 4, 5]]   =>      4
-#                 [recursion] 'find' list is [[4, 5]]      =>      5
-#                 [recursion] 'find' list is [[5]]         =>      5
-# None
-#                 [recursion] 'find' list is [[1, 2, 3, 4, 5]]     =>      3
-#                 [recursion] 'find' list is [[3, 4, 5]]   =>      4
-#                 [recursion] 'find' list is [[4, 5]]      =>      5
-#                 [recursion] 'find' list is [[5]]         =>      5
-#         result_list is [[None, 1, None, None]]
-# ====================
-# target number is **5**, sorted_list is [[1, 2, 3, 4, 5]]
-#                 [recursion] 'find' list is [[1, 2, 3, 4, 5]]     =>      3
-#                 [recursion] 'find' list is [[3, 4, 5]]   =>      4
-#                 [recursion] 'find' list is [[4, 5]]      =>      5
-# ***** FIND!  ***** =>  5
-# None
-#                 [recursion] 'find' list is [[1, 2, 3, 4, 5]]     =>      3
-#                 [recursion] 'find' list is [[3, 4, 5]]   =>      4
-#                 [recursion] 'find' list is [[4, 5]]      =>      5
-# ***** FIND!  ***** =>  5
-#         result_list is [[None, 1, None, None, None]]
-# ====================
